@@ -1,11 +1,13 @@
-from turtle import Screen, Turtle
+from turtle import Screen
 import time
 from snake import Snake
+from food import Food
+from config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 # Setup Screen
 screen = Screen()
-screen.setup(width=600, height=600)
+screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
 screen.bgcolor("black")
 screen.title("My Snake game")
 # Turn off animations, allows manual control over graphical updates
@@ -13,6 +15,9 @@ screen.tracer(0)
 
 # Create snake
 snake = Snake()
+
+# Create Food
+food = Food()
 
 # Add listener
 screen.listen()
@@ -28,22 +33,8 @@ while game_is_on:
 
     snake.move()
 
+    # Detect food collision
+    if snake.head.distance(food) < 15.0:
+        food.refresh()
 screen.exitonclick()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-screen.exitonclick()
