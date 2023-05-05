@@ -3,10 +3,18 @@ STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 # By default, each block on the segment is size 20. Keep this in mind if you want to increase move distance.
 MOVE_DISTANCE = 20
 
+# turtle.Turtle Heading constants for directions.
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
+
+
 class Snake():
     def __init__(self):
         self.segments = []
         self.create_snake()
+        self.head = self.segments[0]
 
     # Create the snake with each segment at the defined coordinates defined in STARTING_POSITIONS
     # Segments should be square shaped and colored white.
@@ -25,4 +33,20 @@ class Snake():
             new_y = self.segments[seg_num - 1].ycor()
             self.segments[seg_num].goto(new_x, new_y)
         # Move the head
-        self.segments[0].forward(MOVE_DISTANCE)
+        self.head.forward(MOVE_DISTANCE)
+
+    def up(self):
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
+
+    def down(self):
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
+
+    def left(self):
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
+
+    def right(self):
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT)
