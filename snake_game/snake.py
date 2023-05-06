@@ -20,11 +20,19 @@ class Snake():
     # Segments should be square shaped and colored white.
     def create_snake(self):
         for position in STARTING_POSITIONS:
-            new_segment = turtle.Turtle(shape="square")
-            new_segment.penup()
-            new_segment.color("white")
-            new_segment.goto(position)
-            self.segments.append(new_segment)
+            self.add_segment(position)
+
+    # requires a 'position' to add a segment to
+    def add_segment(self, position):
+        new_segment = turtle.Turtle(shape="square")
+        new_segment.penup()
+        new_segment.color("white")
+        new_segment.goto(position)
+        self.segments.append(new_segment)
+
+    def extend(self):
+        # Uses the Turtle position() method to return the absolute (x, y) coordinates
+        self.add_segment(self.segments[-1].position())
 
     def move(self):
         # Move the segments, except the head. Iterate in reverse order.
@@ -50,3 +58,4 @@ class Snake():
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
