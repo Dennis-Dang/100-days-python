@@ -51,7 +51,7 @@ while game_is_on:
     if snake.head.xcor() > wall.wall_limit_x \
             or snake.head.ycor() > wall.wall_limit_y \
             or snake.head.xcor() < -wall.wall_limit_x \
-            or snake.head.xcor() < -wall.wall_limit_y:
+            or snake.head.ycor() < -wall.wall_limit_y:
         game_is_on = False
         scoreboard.game_over()
 
