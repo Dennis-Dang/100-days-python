@@ -1,10 +1,10 @@
-from turtle import Screen
+from turtle import Screen, Turtle
 import time
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 from snake import Snake
 from food import Food
 from scoreboard import ScoreBoard
-
+from wall import Wall
 
 # Setup Screen
 screen = Screen()
@@ -13,6 +13,10 @@ screen.bgcolor("black")
 screen.title("My Snake game")
 # Turn off animations, allows manual control over graphical updates
 screen.tracer(0)
+
+# Create wall
+wall = Wall()
+
 
 # Create snake
 snake = Snake()
@@ -42,5 +46,13 @@ while game_is_on:
         food.refresh()
         # Increment 1 to score.
         scoreboard.increase_score()
+
+    # Detect wall collision
+    if snake.head.xcor() > wall.wall_limit_x \
+            or snake.head.ycor() > wall.wall_limit_y \
+            or snake.head.xcor() < -wall.wall_limit_x \
+            or snake.head.xcor() < -wall.wall_limit_y:
+        game_is_on = False
+        scoreboard.game_over()
 screen.exitonclick()
 
