@@ -1,4 +1,4 @@
-from turtle import Screen, Turtle
+from turtle import Screen
 import time
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 from snake import Snake
@@ -16,7 +16,6 @@ screen.tracer(0)
 
 # Create wall
 wall = Wall()
-
 
 # Create snake
 snake = Snake()
@@ -57,12 +56,9 @@ while game_is_on:
         scoreboard.game_over()
 
     # Detect Tail collision
-    for segment in snake.segments():
-        if snake.head == segment:
-            pass
+    for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
             game_is_on = False
             scoreboard.game_over()
 
 screen.exitonclick()
-
