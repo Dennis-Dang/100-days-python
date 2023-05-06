@@ -9,6 +9,7 @@ that classic retro gaming experience.</p>
 
 ## Specifications:
 
+- For simplicity, the screen will be 600x800 pixels in size.
 - Display the game UI elements and regularly update positions of them:
   - Ball, Player 1 & Player 2
 - Keep score for both players
