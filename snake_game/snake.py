@@ -58,3 +58,11 @@ class Snake:
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    def hide(self, hide):
+        if hide:
+            for segment in self.segments:
+                segment.hideturtle()
+        else:
+            for segment in self.segments:
+                segment.showturtle()
