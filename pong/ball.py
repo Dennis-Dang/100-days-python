@@ -17,3 +17,7 @@ class Ball(Turtle):
 
     def bounce_paddle(self):
         self.setheading(180 - self.heading())
+
+    def reset_position(self):
+        self.goto(0, 0)
+        self.bounce_paddle()
