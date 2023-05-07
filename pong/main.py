@@ -1,5 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
+from ball import Ball
+import time
 
 # Screen setup
 screen = Screen()
@@ -11,6 +13,9 @@ screen.tracer(0)
 # Instantiate both paddles at their corresponding starting locations
 r_paddle = Paddle(350, 0)
 l_paddle = Paddle(-350, 0)
+
+# Instantiate the ball
+ball = Ball()
 
 # Event listener setup
 # Even though I have an n-key rollover keyboard, I cannot move both paddles simultaneously.
@@ -25,6 +30,8 @@ screen.onkeypress(fun=r_paddle.down, key="s")
 # Main game loop
 game_is_on = True
 while game_is_on:
+    time.sleep(0.1)
     screen.update()
+    ball.move()
 
 screen.exitonclick()
