@@ -8,7 +8,6 @@ class Paddle(Turtle):
         self.color("white")
         self.penup()
         self.shapesize(stretch_wid=1.0, stretch_len=5.0)
-        self.setheading(90)
         self.goto(x, y)
 
     def up(self):

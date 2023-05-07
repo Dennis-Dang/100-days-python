@@ -1,8 +1,11 @@
-from turtle import Screen
+from turtle import Screen, mode
 from paddle import Paddle
 from ball import Ball
 from scoreboard import Scoreboard
 import time
+
+# Set turtle mode to logo
+mode("logo")
 
 # Screen setup
 screen = Screen()
@@ -48,8 +51,8 @@ while game_is_on:
     # Additional notes:
     # The (+/-) 30 value is the offset of the ball size.
     # The (+-) 350 should be the x coordinates of the left and right paddles.
-    if (ball.xcor() <= -350+30 and ball.distance(l_paddle) < 50) \
-            or (ball.xcor() >= 350-30 and ball.distance(r_paddle) < 50):
+    if (ball.xcor() <= -350+30 and ball.distance(l_paddle) < 50 and 180 < ball.heading() < 360) \
+            or (ball.xcor() >= 350-30 and ball.distance(r_paddle) < 50 and 0 < ball.heading() < 180):
         ball.bounce_paddle()
 
     # Detect Left Paddle misses

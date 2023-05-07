@@ -14,10 +14,10 @@ class Ball(Turtle):
         self.forward(10)
 
     def bounce_wall(self):
-        self.setheading(-self.heading())
+        self.setheading(180 - self.heading())
 
     def bounce_paddle(self):
-        self.setheading(180 - self.heading())
+        self.setheading(-self.heading())
         # Increases the difficulty by making animations faster every time the ball gets hit by a paddle.
         # 0.9 is a modifier multiplier that reduces the delay time (default at 0.1).
         self.move_speed *= 0.9
