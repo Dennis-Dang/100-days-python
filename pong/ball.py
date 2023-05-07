@@ -10,6 +10,10 @@ class Ball(Turtle):
         self.penup()
 
     def move(self):
-        if self.ycor() <= -280 or self.ycor() >= 280:
-            self.setheading(-self.heading())
         self.forward(10)
+
+    def bounce_wall(self):
+        self.setheading(-self.heading())
+
+    def bounce_paddle(self):
+        self.setheading(180 - self.heading())
