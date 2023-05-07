@@ -8,6 +8,7 @@ class Ball(Turtle):
         self.color("white")
         self.setheading(random.randrange(0, 360, 40))
         self.penup()
+        self.move_speed = 0.1
 
     def move(self):
         self.forward(10)
@@ -17,7 +18,12 @@ class Ball(Turtle):
 
     def bounce_paddle(self):
         self.setheading(180 - self.heading())
+        # Increases the difficulty by making animations faster every time the ball gets hit by a paddle.
+        # 0.9 is a modifier multiplier that reduces the delay time (default at 0.1).
+        self.move_speed *= 0.9
+        print(f"Difficulty increased to: {self.move_speed}")
 
     def reset_position(self):
         self.goto(0, 0)
+        self.move_speed = 0.1
         self.bounce_paddle()

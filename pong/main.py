@@ -33,7 +33,8 @@ screen.onkeypress(fun=r_paddle.down, key="s")
 # Main game loop
 game_is_on = True
 while game_is_on:
-    time.sleep(0.1)
+    # time.sleep controls how fast the animations go. The lower the number, the faster the animation speed is.
+    time.sleep(ball.move_speed)
     screen.update()
     ball.move()
 
