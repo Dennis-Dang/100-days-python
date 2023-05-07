@@ -1,6 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 # Screen setup
@@ -16,6 +17,8 @@ l_paddle = Paddle(-350, 0)
 
 # Instantiate the ball
 ball = Ball()
+
+scoreboard = Scoreboard()
 
 # Event listener setup
 # Even though I have an n-key rollover keyboard, I cannot move both paddles simultaneously.
@@ -50,9 +53,11 @@ while game_is_on:
 
     # Detect Left Paddle misses
     if ball.xcor() < -380:
+        scoreboard.left_scores(False)
         ball.reset_position()
 
     # Detect Right Paddle misses
     if ball.xcor() > 380:
+        scoreboard.left_scores(True)
         ball.reset_position()
 screen.exitonclick()
