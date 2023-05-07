@@ -39,6 +39,11 @@ while game_is_on:
         ball.bounce_wall()
 
     # Ball to paddle collision detection
+    # If the ball is close to the x-coordinate bounding lines nearest to the center, and if the ball is less than 50
+    # distance away, then it has collided with the paddle.
+    # Additional notes:
+    # The (+/-) 30 value is the offset of the ball size.
+    # The (+-) 350 should be the x coordinates of the left and right paddles.
     if (ball.xcor() <= -350+30 and ball.distance(l_paddle) < 50) \
             or (ball.xcor() >= 350-30 and ball.distance(r_paddle) < 50):
         ball.bounce_paddle()
