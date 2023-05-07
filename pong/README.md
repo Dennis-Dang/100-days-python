@@ -19,3 +19,9 @@ that classic retro gaming experience.</p>
   - Player 1 and Player 2
 
 ## Learning Outcomes:
+
+- Solidify concepts learned from inheritance and Object-Oriented Programming
+  - Implemented classes that inherited the Turtle class
+- More practice with event listeners
+  - Used the onkeypress method vs onkey method
+- More practice with collision detection, especially with different shapes
