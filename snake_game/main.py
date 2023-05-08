@@ -40,10 +40,9 @@ def pause_game():
 
 
 def game_over():
-    snake.hide(True)
-    food.hideturtle()
     scoreboard.game_over()
-    screen.update()
+    snake.reset()
+    pause_game()
 
 
 # Add listener
@@ -73,13 +72,11 @@ while game_is_on:
                 or snake.head.ycor() > wall.wall_limit_y \
                 or snake.head.xcor() < -wall.wall_limit_x \
                 or snake.head.ycor() < -wall.wall_limit_y:
-            game_is_on = False
             game_over()
 
         # Detect Tail collision
         for segment in snake.segments[1:]:
             if snake.head.distance(segment) < 10:
-                game_is_on = False
                 game_over()
 
 screen.exitonclick()

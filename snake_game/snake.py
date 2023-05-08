@@ -66,3 +66,10 @@ class Snake:
         else:
             for segment in self.segments:
                 segment.showturtle()
+
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(10000, 10000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
