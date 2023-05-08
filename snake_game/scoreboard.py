@@ -15,12 +15,13 @@ positions = {
 class ScoreBoard(Turtle):
     def __init__(self):
         super().__init__()
+        with open("data.txt", mode='r') as file:
+            self.high_score = int(file.read())
         self.color("white")
         self.penup()
         self.hideturtle()
         self.setposition(positions["score"])
         self.score = -1
-        self.high_score = 0
         self.increase_score()
         self.paused = True
         self.intro()
@@ -44,6 +45,9 @@ class ScoreBoard(Turtle):
         self.goto(positions["game_over"])
         self.write("GAME OVER", align=ALIGNMENT, font=FONT)
         self.score = 0
+
+        with open("data.txt", mode='w') as file:
+            file.write(f"{self.high_score}")
 
     def intro(self):
         self.goto(positions["intro"])
