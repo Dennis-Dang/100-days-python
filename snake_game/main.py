@@ -27,22 +27,23 @@ food = Food()
 scoreboard = ScoreBoard()
 
 
-class Game:
-    def __init__(self):
-        self.pause = True
-
-
-game = Game()
-
-
-def pause_game(the_game):
-    the_game.pause ^= the_game.pause
-    if the_game.pause:
+def pause_game():
+    scoreboard.pause()
+    if scoreboard.paused:
+        scoreboard.intro()
         food.hideturtle()
-        snake.hide(the_game.pause)
+        snake.hide(scoreboard.paused)
     else:
         food.showturtle()
-        snake.hide(the_game.pause)
+        snake.hide(scoreboard.paused)
+        scoreboard.update_scoreboard()
+
+
+def game_over():
+    snake.hide(True)
+    food.hideturtle()
+    scoreboard.game_over()
+    screen.update()
 
 
 # Add listener
@@ -51,14 +52,13 @@ screen.onkey(fun=snake.up, key="Up")
 screen.onkey(fun=snake.down, key="Down")
 screen.onkey(fun=snake.left, key="Left")
 screen.onkey(fun=snake.right, key="Right")
-screen.onkey(fun=lambda: pause_game(game), key="Return")
+screen.onkey(fun=pause_game, key="Return")
 
 game_is_on = True
 while game_is_on:
     screen.update()
     time.sleep(0.1)
-    print(game.pause)
-    if not game.pause:
+    if not scoreboard.paused:
         snake.move()
 
         # Detect food collision
@@ -74,12 +74,12 @@ while game_is_on:
                 or snake.head.xcor() < -wall.wall_limit_x \
                 or snake.head.ycor() < -wall.wall_limit_y:
             game_is_on = False
-            scoreboard.game_over()
+            game_over()
 
         # Detect Tail collision
         for segment in snake.segments[1:]:
             if snake.head.distance(segment) < 10:
                 game_is_on = False
-                scoreboard.game_over()
+                game_over()
 
 screen.exitonclick()
