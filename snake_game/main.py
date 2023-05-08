@@ -1,4 +1,4 @@
-from turtle import Screen, Turtle
+from turtle import Screen
 import time
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 from snake import Snake

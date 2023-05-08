@@ -11,6 +11,7 @@ positions = {
     "intro": (0, 30)
 }
 
+
 class ScoreBoard(Turtle):
     def __init__(self):
         super().__init__()
