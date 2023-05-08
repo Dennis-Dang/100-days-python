@@ -27,3 +27,4 @@ while game_is_on:
     if player.ycor() >= FINISH_LINE_Y:
         player.reset_pos()
         scoreboard.add()
+        car_manager.level_up()

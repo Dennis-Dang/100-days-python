@@ -10,9 +10,9 @@ class Car(Turtle):
     """The `Car` object that moves horizontally from the right to left edges of the screen."""
     def __init__(self):
         """Creates a `Turtle` object with the following characteristics: \n
-            Random color (from COLORS list), \n
-            Size of 40x20 pixels, \n
-            Spawns at x-coordinate 300, which is at the right edge of the screen, at a random y-coordinate
+            Random `color` (from COLORS list), \n
+            `Size` of 40x20 pixels, \n
+            Spawns at x-coordinate `300`, which is at the right edge of the screen, at a `random` y-coordinate
 
         """
         super().__init__(shape="square")
@@ -25,10 +25,10 @@ class Car(Turtle):
         self.starting_y_pos = random.randint(-250, 250)
         self.goto(300, self.starting_y_pos)
 
-    def move(self):
+    def move(self, amount):
         """Moves the turtle towards the left edge of the screen. The constant defined MOVE_INCREMENT determines the
         distance all car objects will advance forward eat time."""
-        self.forward(MOVE_INCREMENT)
+        self.forward(amount)
 
 
 class CarManager:
@@ -36,6 +36,7 @@ class CarManager:
     def __init__(self):
         """The constructor initializes an empty list called all_cars to later manage the collection of cars."""
         self.all_cars = []
+        self.car_speed = STARTING_MOVE_DISTANCE
 
     def create_car(self):
         """Constructs, and then adds a `Car` object to the car collection list. This process has a 1 in 10 chance of
@@ -50,4 +51,8 @@ class CarManager:
             if car.xcor() < -300:
                 car.hideturtle()
                 self.all_cars.remove(car)
-            car.move()
+            car.move(self.car_speed)
+
+    def level_up(self):
+        self.car_speed += MOVE_INCREMENT
+
