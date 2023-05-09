@@ -17,26 +17,27 @@ marker.color("black")
 
 
 def mark_state(marker, answer):
+    # Same thing as int(data[data.state == answer]) pandas requires you to use
+    #   iloc[] position indexing in future iterations.
     x_cord = int(data[data.state == answer].x.iloc[0])
     y_cord = int(data[data.state == answer].y.iloc[0])
     marker.goto(x_cord, y_cord)
+    # Write the state's name
     marker.write(answer)
 
 
-score = 0
 game_is_on = True
 while game_is_on:
-    guess = screen.textinput(title=f"Guess a state. {score}/50", prompt=f"Guess a state. {score}/50")
+    # title and prompt is the same because title was not appearing in length on my screen unless I resize the window.
+    guess = screen.textinput(title=f"Guess a state. {50 - len(states)}/50",
+                             prompt=f"Guess a state. {50 - len(states)}/50")
     guess = guess.title()
     if guess in states:
-        score += 1
         mark_state(marker, guess)
         states.remove(guess)
-
-    if score == 50:
+    if len(states) == 0:
         game_is_on = False
         print("Congrats! You named all 50 states! Here is a cookie: 🍪")
-
     if guess == "Exit":
         pandas.DataFrame(states).to_csv("states_to_study.csv")
         game_is_on = False
