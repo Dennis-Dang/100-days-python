@@ -49,18 +49,15 @@ data = pandas.read_csv("weather_data.csv")
 # print(f"Monday's fahrenheit temperature {monday_temp} in Celsius is: {round(monday_temp_C, 2)}")
 
 # Creating dataframes:
-grade_book = {
-    "students": ["John", "Alex", "Eric", "James", "Gabriel"],
-    "score": [68, 78, 100, 92, 95]
-}
+# grade_book = {
+#     "students": ["John", "Alex", "Eric", "James", "Gabriel"],
+#     "score": [68, 78, 100, 92, 95]
+# }
 # Pass the dictionary to Dataframe constructor
-data = pandas.DataFrame(grade_book)
+# data = pandas.DataFrame(grade_book)
 # Printing our looks just like dataframe, it nicely formats it correctly!
-print(data)
+# print(data)
 
 # Convert our dataframe into a csv file named "new_data.csv" in our project directory.
 # It's not a perfect format. I don't like the first column. But it's a good start.
-data.to_csv("new_data.csv")
-
-import_data = pandas.read_csv("new_data.csv")
-print(import_data)
+# data.to_csv("new_data.csv")
