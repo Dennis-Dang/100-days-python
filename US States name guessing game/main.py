@@ -35,6 +35,7 @@ while game_is_on:
 
     if score == 50:
         game_is_on = False
+        print("Congrats! You named all 50 states! Here is a cookie: 🍪")
 
     if guess == "Exit":
         pandas.DataFrame(states).to_csv("states_to_study.csv")
