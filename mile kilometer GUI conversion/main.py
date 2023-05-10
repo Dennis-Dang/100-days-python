@@ -2,7 +2,7 @@ from tkinter import *
 
 window = Tk()
 window.title("My First GUI Program")
-window.minsize(width=500, height=500)
+window.config(padx=50, pady=50)
 
 
 def convert_to_km():
@@ -11,21 +11,19 @@ def convert_to_km():
 
 
 miles = Entry(width=10)
-miles.grid(column=1, row=0)
+miles.grid(column=0, row=0)
 
 text_miles = Label(text="Miles", font=("Arial", 24))
-text_miles.grid(column=2, row=0)
-
-text_is_equal_to = Label(text="is equal to", font=("Arial", 24))
-text_is_equal_to.grid(column=0, row=1)
-
-text_km = Label(text="km", font=("Arial", 24))
-text_km.grid(column=2, row=1)
+text_miles.grid(column=1, row=0, sticky='w')
 
 kilometers_conversion = Label(text='0', font=("Arial", 24))
-kilometers_conversion.grid(column=1, row=1)
+kilometers_conversion.grid(column=0, row=1)
+
+text_km = Label(text="Kilometers", font=("Arial", 24))
+text_km.grid(column=1, row=1, sticky='w')
 
 calculate = Button(text="calculate", command=convert_to_km)
-calculate.grid(column=1, row=2)
+calculate.config(padx="20")
+calculate.grid(column=2, row=1)
 
 window.mainloop()
