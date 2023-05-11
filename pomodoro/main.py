@@ -24,7 +24,6 @@ INTERVALS = {
 REPS = 0
 
 # ---------------------------- TIMER RESET ------------------------------- #
-
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
 
@@ -34,10 +33,13 @@ def start_timer():
 
     if REPS % 8 == 0:
         count_down(INTERVALS["LONG_BREAK_MIN"] * 60)
+        lbl_title.config(text="20 Min Break", fg=RED)
     elif REPS % 2 == 0:
         count_down(INTERVALS["SHORT_BREAK_MIN"] * 60)
+        lbl_title.config(text="5 Min Break", fg=PINK)
     else:
         count_down(INTERVALS["WORK_MIN"]*60)
+        lbl_title.config(text="25 Min Work", fg=GREEN)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
