@@ -54,9 +54,11 @@ def start_timer():
         cancel_timer()
 
     print(REPS)
+    btn_start.config(text="⏭")
     if REPS % 8 == 0:
         count_down(INTERVALS["LONG_BREAK_MIN"] * 60)
         lbl_title.config(text="20 Min Break", fg=RED)
+        btn_start.config(text="🔄")
     elif REPS % 2 == 0:
         count_down(INTERVALS["SHORT_BREAK_MIN"] * 60)
         lbl_title.config(text="5 Min Break", fg=PINK)
@@ -84,7 +86,7 @@ def count_down(count):
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Pomodoro")
-window.config(padx=50, pady=50, bg=YELLOW)
+window.config(padx=200, pady=100, bg=YELLOW)
 
 # Create a canvas to layer UI objects.
 canvas = Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
@@ -99,10 +101,10 @@ lbl_title.grid(row=0, column=0, sticky='ew')
 frm_buttons = Frame(master=window, bg=YELLOW)
 frm_buttons.grid(row=2, column=0, pady=20)
 
-btn_start = Button(master=frm_buttons, text="Start", command=start_timer)
-btn_start.pack(side="left", padx=(0, 50))
-btn_reset = Button(master=frm_buttons, text="Reset", command=reset_timer)
-btn_reset.pack(side="right", padx=(50, 0))
+btn_start = Button(master=frm_buttons, text="Start", command=start_timer, font=(FONT_NAME, 16))
+btn_start.pack(side="left", padx=(0, 50), pady=20)
+btn_reset = Button(master=frm_buttons, text="Reset", command=reset_timer, font=(FONT_NAME, 16))
+btn_reset.pack(side="right", padx=(50, 0), pady=20)
 lbl_status = Label(font=(FONT_NAME, 20), fg=GREEN, bg=YELLOW)
 lbl_status.grid(row=3, column=0)
 
