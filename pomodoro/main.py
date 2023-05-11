@@ -17,13 +17,11 @@ FONT_NAME = "Courier"
 # 1 final 25-min Work session
 # 1 final 20-min Long Break session.
 INTERVALS = {
-    "WORK_MIN": 2,
-    "SHORT_BREAK_MIN": 1,
-    "LONG_BREAK_MIN": 3
+    "WORK_MIN": 25,
+    "SHORT_BREAK_MIN": 5,
+    "LONG_BREAK_MIN": 20
 }
 REPS = 0
-
-# ("WORK_MIN": 25,    "SHORT_BREAK_MIN": 5, "LONG_BREAK_MIN": 20)
 
 # ---------------------------- TIMER RESET ------------------------------- #
 
