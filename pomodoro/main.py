@@ -85,8 +85,11 @@ def count_down(count):
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
+window.resizable(False, False)
 window.title("Pomodoro")
-window.config(padx=200, pady=100, bg=YELLOW)
+window.config(padx=20, pady=10, bg=YELLOW)
+
+window.columnconfigure(0, weight=1, minsize=400)
 
 # Create a canvas to layer UI objects.
 canvas = Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
@@ -96,17 +99,17 @@ timer_text = canvas.create_text(100, 130, text="00:00", fill="white", font=(FONT
 canvas.grid(row=1, column=0)
 
 lbl_title = Label(text="Timer", font=(FONT_NAME, 40, "bold"), fg=RED, bg=YELLOW)
-lbl_title.grid(row=0, column=0, sticky='ew')
+lbl_title.grid(row=0, column=0)
 
 frm_buttons = Frame(master=window, bg=YELLOW)
-frm_buttons.grid(row=2, column=0, pady=20)
+frm_buttons.grid(row=2, column=0, pady=(10,0))
 
-btn_start = Button(master=frm_buttons, text="Start", command=start_timer, font=(FONT_NAME, 16))
+btn_start = Button(master=frm_buttons, text="Start", command=start_timer, font=(FONT_NAME, 20))
 btn_start.pack(side="left", padx=(0, 50), pady=20)
-btn_reset = Button(master=frm_buttons, text="Reset", command=reset_timer, font=(FONT_NAME, 16))
+btn_reset = Button(master=frm_buttons, text="Reset", command=reset_timer, font=(FONT_NAME, 20))
 btn_reset.pack(side="right", padx=(50, 0), pady=20)
 lbl_status = Label(font=(FONT_NAME, 20), fg=GREEN, bg=YELLOW)
-lbl_status.grid(row=3, column=0)
+lbl_status.grid(row=3, column=0, pady=20)
 
 
 window.mainloop()
