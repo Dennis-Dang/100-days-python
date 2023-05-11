@@ -17,13 +17,28 @@ FONT_NAME = "Courier"
 # 1 final 25-min Work session
 # 1 final 20-min Long Break session.
 INTERVALS = {
-    "WORK_MIN": 25,
-    "SHORT_BREAK_MIN": 5,
-    "LONG_BREAK_MIN": 20
+    "WORK_MIN": 1,
+    "SHORT_BREAK_MIN": 2,
+    "LONG_BREAK_MIN": 3
 }
 REPS = 0
-
+timer = None
 # ---------------------------- TIMER RESET ------------------------------- #
+
+
+def cancel_timer():
+    window.after_cancel(timer)
+
+
+def reset_timer():
+    if timer is not None:
+        window.after_cancel(timer)
+        global REPS
+        REPS = 0
+        canvas.itemconfig(timer_text, text='00:00', fill='white')
+        lbl_title.config(text='Timer', fg=RED)
+        lbl_status.config(text='')
+
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
 
@@ -31,6 +46,10 @@ def start_timer():
     global REPS
     REPS += 1
 
+    if timer is not None:
+        cancel_timer()
+
+    print(REPS)
     if REPS % 8 == 0:
         count_down(INTERVALS["LONG_BREAK_MIN"] * 60)
         lbl_title.config(text="20 Min Break", fg=RED)
@@ -41,7 +60,11 @@ def start_timer():
         count_down(INTERVALS["WORK_MIN"]*60)
         lbl_title.config(text="25 Min Work", fg=GREEN)
 
-
+    marks = ""
+    num_work_sessions = floor(REPS / 2)
+    for _ in range(num_work_sessions):
+        marks += "✔"
+    lbl_status.config(text=marks)
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 
 
@@ -50,7 +73,8 @@ def count_down(count):
     count_sec = count % 60
     canvas.itemconfig(timer_text, text=f"{count_min:02}:{count_sec:02}")
     if count > 0:
-        window.after(1000, count_down, count - 1)
+        global timer
+        timer = window.after(1000, count_down, count - 1)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -73,9 +97,9 @@ frm_buttons.grid(row=2, column=0, pady=20)
 
 btn_start = Button(master=frm_buttons, text="Start", command=start_timer)
 btn_start.pack(side="left", padx=(0, 50))
-btn_reset = Button(master=frm_buttons, text="Reset")
+btn_reset = Button(master=frm_buttons, text="Reset", command=reset_timer)
 btn_reset.pack(side="right", padx=(50, 0))
-lbl_status = Label(text="✔", font=(FONT_NAME, 20), fg=GREEN, bg=YELLOW)
+lbl_status = Label(font=(FONT_NAME, 20), fg=GREEN, bg=YELLOW)
 lbl_status.grid(row=3, column=0)
 
 
