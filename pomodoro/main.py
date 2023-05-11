@@ -102,11 +102,13 @@ lbl_title = Label(text="Timer", font=(FONT_NAME, 40, "bold"), fg=RED, bg=YELLOW)
 lbl_title.grid(row=0, column=0)
 
 frm_buttons = Frame(master=window, bg=YELLOW)
-frm_buttons.grid(row=2, column=0, pady=(10,0))
+frm_buttons.grid(row=2, column=0, pady=(10, 0))
 
-btn_start = Button(master=frm_buttons, text="▶", command=start_timer, font=(FONT_NAME, 25, "bold"), fg=WHITE, bg=ORANGE, padx=20)
+btn_start = Button(master=frm_buttons, text="▶", command=start_timer, font=(FONT_NAME, 25, "bold"),
+                   fg=WHITE, bg=ORANGE, padx=20)
 btn_start.pack(side="left", padx=(0, 50), pady=20)
-btn_reset = Button(master=frm_buttons, text="Reset", command=reset_timer, font=(FONT_NAME, 25, "bold"), fg=WHITE, bg=ORANGE)
+btn_reset = Button(master=frm_buttons, text="Reset", command=reset_timer, font=(FONT_NAME, 25, "bold"),
+                   fg=WHITE, bg=ORANGE)
 btn_reset.pack(side="right", padx=(50, 0), pady=20)
 lbl_status = Label(font=(FONT_NAME, 20), fg=GREEN, bg=YELLOW)
 lbl_status.grid(row=3, column=0, pady=20)
