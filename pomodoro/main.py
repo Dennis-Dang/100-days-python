@@ -44,6 +44,10 @@ def reset_timer():
 
 def start_timer():
     global REPS
+
+    if REPS == 8:
+        reset_timer()
+
     REPS += 1
 
     if timer is not None:
