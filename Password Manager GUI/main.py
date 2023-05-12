@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import messagebox
 import password_gen
 import pyperclip
-from PIL import Image, ImageTk
 
 DEFAULT_EMAIL = "dennis@example.com"
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
