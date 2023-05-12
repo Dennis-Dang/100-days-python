@@ -1,10 +1,15 @@
 from tkinter import *
 from tkinter import messagebox
+import password_gen
 from PIL import Image, ImageTk
 
 DEFAULT_EMAIL = "dennis@example.com"
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
+
+def generate_password():
+    ent_password.delete(0, END)
+    ent_password.insert(0, password_gen.generate_password())
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 
@@ -58,7 +63,7 @@ ent_username = Entry(master=control_frame)
 
 frame2 = Frame(master=control_frame)
 ent_password = Entry(master=frame2)
-btn_generate = Button(master=frame2, text="Generate Password")
+btn_generate = Button(master=frame2, text="Generate Password", command=generate_password)
 ent_password.grid(column=0, row=0, sticky="w", padx=(0, 50))
 btn_generate.grid(column=1, row=0, sticky="e")
 frame2.grid(column=1, row=2, sticky="w")
