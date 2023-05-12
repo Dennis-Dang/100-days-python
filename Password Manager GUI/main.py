@@ -13,16 +13,20 @@ def save_pwd():
     str_username = ent_username.get()
     str_password = ent_password.get()
 
-    is_ok = messagebox.askokcancel(title="Confirmation", message=f"Adding info to password file:\n\n"
-                                                                 f"Website: \t{str_website}\n"
-                                                                 f"Email/Username: \t{str_username}\n"
-                                                                 f"Password: \t{str_password}")
-    if is_ok:
-        with open("data.txt", mode='w') as file:
-            file.writelines(f"{str_website} | {str_username} | {str_password}")
-            ent_website.delete(0, END)
-            ent_username.delete(0, END)
-            ent_password.delete(0, END)
+    if len(str_website) == 0 or len(str_username) == 0 or len(str_password) == 0:
+        messagebox.showinfo(title="Unfilled fields", message="All fields must be filled.")
+    else:
+        is_ok = messagebox.askokcancel(title="Confirmation", message=f"Adding info to password file:\n\n"
+                                                                     f"Website: \t{str_website}\n"
+                                                                     f"Email/Username: \t{str_username}\n"
+                                                                     f"Password: \t{str_password}")
+        if is_ok:
+            with open("data.txt", mode='w') as file:
+                file.writelines(f"{str_website} | {str_username} | {str_password}")
+                ent_website.delete(0, END)
+                ent_username.delete(0, END)
+                ent_password.delete(0, END)
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 
