@@ -34,15 +34,8 @@ def save_pwd():
                 ent_website.delete(0, END)
                 ent_password.delete(0, END)
 
+
 # ---------------------------- UI SETUP ------------------------------- #
-
-
-def get_canvas_size(event):
-    canvas_width = event.width
-    canvas_height = event.height
-    print(canvas_width, canvas_height)
-
-
 window = Tk()
 window.title("Password Manager")
 window.config(padx=50, pady=50)
@@ -52,7 +45,6 @@ canvas = Canvas(master=window, height=200, width=200)
 logo_img = PhotoImage(file="logo.png")
 image_item = canvas.create_image(100, 100, image=logo_img)
 canvas.grid(column=0, row=0)
-canvas.bind("<Configure>", get_canvas_size)
 
 control_frame = Frame(master=window)
 lbl_website = Label(master=control_frame, text="Website: ", pady=5)
