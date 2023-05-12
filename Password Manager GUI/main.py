@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import password_gen
+import pyperclip
 from PIL import Image, ImageTk
 
 DEFAULT_EMAIL = "dennis@example.com"
@@ -9,7 +10,9 @@ DEFAULT_EMAIL = "dennis@example.com"
 
 def generate_password():
     ent_password.delete(0, END)
-    ent_password.insert(0, password_gen.generate_password())
+    password = password_gen.generate_password()
+    ent_password.insert(0, password)
+    pyperclip.copy(password)
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 
@@ -26,7 +29,7 @@ def save_pwd():
                                                                      f"Email/Username: \t{str_username}\n"
                                                                      f"Password: \t{str_password}")
         if is_ok:
-            with open("data.txt", mode='w') as file:
+            with open("data.txt", mode='a') as file:
                 file.writelines(f"{str_website} | {str_username} | {str_password}")
                 ent_website.delete(0, END)
                 ent_username.delete(0, END)
