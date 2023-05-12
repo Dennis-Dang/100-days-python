@@ -16,7 +16,7 @@ def get_canvas_size(event):
 
 window = Tk()
 window.title("Password Manager")
-window.config(padx=20, pady=20)
+window.config(padx=50, pady=50)
 window.resizable(False, False)
 
 canvas = Canvas(master=window, height=200, width=200)
@@ -26,11 +26,12 @@ canvas.grid(column=0, row=0)
 canvas.bind("<Configure>", get_canvas_size)
 
 control_frame = Frame(master=window)
-lbl_website = Label(master=control_frame, text="Website: ")
-lbl_username = Label(master=control_frame, text="Email/Username: ")
+lbl_website = Label(master=control_frame, text="Website: ", pady=5)
+lbl_username = Label(master=control_frame, text="Email/Username: ", pady=5)
+lbl_password = Label(master=control_frame, text="Password: ", pady=5)
 ent_website = Entry(master=control_frame)
 ent_username = Entry(master=control_frame)
-lbl_password = Label(master=control_frame, text="Password: ")
+
 
 frame2 = Frame(master=control_frame)
 ent_password = Entry(master=frame2)
@@ -47,7 +48,7 @@ lbl_password.grid(column=0, row=2, sticky="w")
 
 
 btn_add = Button(master=control_frame, text="Add")
-btn_add.grid(column=1, row=3, columnspan=2, sticky="ew")
+btn_add.grid(column=1, row=3, columnspan=2, sticky="ew", pady=10)
 control_frame.grid(column=0, row=1)
 
 window.mainloop()
