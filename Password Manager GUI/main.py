@@ -32,7 +32,6 @@ def save_pwd():
             with open("data.txt", mode='a') as file:
                 file.writelines(f"{str_website} | {str_username} | {str_password}\n")
                 ent_website.delete(0, END)
-                ent_username.delete(0, END)
                 ent_password.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
