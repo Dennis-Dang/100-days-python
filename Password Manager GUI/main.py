@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import password_gen
 import pyperclip
+import json
 
 DEFAULT_EMAIL = "dennis@example.com"
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -20,6 +21,13 @@ def save_pwd():
     str_username = ent_username.get()
     str_password = ent_password.get()
 
+    json_data = {
+        str_website: {
+            "Email": str_username,
+            "Password": str_password
+        }
+    }
+
     if len(str_website) == 0 or len(str_username) == 0 or len(str_password) == 0:
         messagebox.showinfo(title="Unfilled fields", message="All fields must be filled.")
     else:
@@ -28,10 +36,19 @@ def save_pwd():
                                                                      f"Email/Username: \t{str_username}\n"
                                                                      f"Password: \t{str_password}")
         if is_ok:
-            with open("data.txt", mode='a') as file:
-                file.writelines(f"{str_website} | {str_username} | {str_password}\n")
-                ent_website.delete(0, END)
-                ent_password.delete(0, END)
+            try:
+                with open("data.json", mode='r') as file:
+                    file_data = json.load(file)
+                    file_data.update(json_data)
+            except FileNotFoundError:
+                with open("data.json", mode='w') as file:
+                    json.dump(json_data, file, indent=4)
+            else:
+                with open("data.json", mode='w') as file:
+                    json.dump(file_data, file, indent=4)
+
+            ent_website.delete(0, END)
+            ent_password.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
