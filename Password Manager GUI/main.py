@@ -51,6 +51,26 @@ def save_pwd():
                 ent_website.delete(0, END)
                 ent_password.delete(0, END)
 
+# ---------------------------- SEARCH PASSWORD ------------------------------- #
+
+
+def search():
+    str_website = ent_website.get()
+    if str_website == "":
+        pass
+    else:
+        try:
+            with open("data.json", mode='r') as file:
+                file_data = json.load(file)
+        except FileNotFoundError:
+            print("File not found")
+        else:
+            try:
+                website_dict = file_data[str_website]
+                messagebox.showinfo(title=str_website, message=f"Username: {website_dict['Email']}\n"
+                                                               f"Password: {website_dict['Password']}")
+            except KeyError as key:
+                messagebox.showinfo(title="Not found", message=f"No passwords for website: \n{key}")
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -70,7 +90,7 @@ lbl_password = Label(master=control_frame, text="Password: ", pady=5)
 frame1 = Frame(master=control_frame)
 ent_website = Entry(master=frame1)
 ent_website.focus()
-btn_search = Button(master=frame1, text="Search", width=15)
+btn_search = Button(master=frame1, text="Search", width=15, command=search)
 ent_website.grid(column=0, row=0, sticky="w",  padx=(0, 20))
 btn_search.grid(column=1, row=0, sticky="e")
 frame1.grid(column=1, row=0, sticky="ew")
