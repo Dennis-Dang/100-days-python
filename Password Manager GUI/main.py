@@ -63,17 +63,17 @@ def search():
             with open("data.json", mode='r') as file:
                 file_data = json.load(file)
         except FileNotFoundError:
-            print("File not found")
+            messagebox.showwarning(title="Error", message="No password file found. Try generating a password.")
         else:
-            try:
+            if str_website in file_data:
                 website_dict = file_data[str_website]
                 messagebox.showinfo(title=str_website, message=f"Username: {website_dict['Email']}\n"
                                                                f"Password: {website_dict['Password']}")
-            except KeyError as key:
-                messagebox.showinfo(title="Not found", message=f"No passwords for website: \n{key}")
-
-
+            else:
+                messagebox.showwarning(title="Error", message=f"No details for website {str_website} found.")
 # ---------------------------- UI SETUP ------------------------------- #
+
+
 window = Tk()
 window.title("Password Manager")
 window.config(padx=50, pady=50)
