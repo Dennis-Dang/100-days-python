@@ -72,6 +72,7 @@ def search():
             except KeyError as key:
                 messagebox.showinfo(title="Not found", message=f"No passwords for website: \n{key}")
 
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Password Manager")
