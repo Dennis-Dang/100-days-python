@@ -17,7 +17,7 @@ def generate_password():
 
 
 def save_pwd():
-    str_website = ent_website.get()
+    str_website = ent_website.get().lower()
     str_username = ent_username.get()
     str_password = ent_password.get()
 
@@ -55,7 +55,7 @@ def save_pwd():
 
 
 def search():
-    str_website = ent_website.get()
+    str_website = ent_website.get().lower()
     if str_website == "":
         pass
     else:
