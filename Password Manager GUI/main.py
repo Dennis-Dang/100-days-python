@@ -39,16 +39,17 @@ def save_pwd():
             try:
                 with open("data.json", mode='r') as file:
                     file_data = json.load(file)
-                    file_data.update(json_data)
+
             except FileNotFoundError:
                 with open("data.json", mode='w') as file:
                     json.dump(json_data, file, indent=4)
             else:
+                file_data.update(json_data)
                 with open("data.json", mode='w') as file:
                     json.dump(file_data, file, indent=4)
-
-            ent_website.delete(0, END)
-            ent_password.delete(0, END)
+            finally:
+                ent_website.delete(0, END)
+                ent_password.delete(0, END)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
