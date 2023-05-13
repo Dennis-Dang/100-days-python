@@ -16,10 +16,13 @@ loop = True
 while loop:
     word = input("Enter a word to turn into NATO: ").upper()
     if word != "EXIT":
-        # Use the NATO dictionary to convert each letter into their corresponding NATO alphabet code.
-        # Condition in dictionary comprehension is necessary in case user enters a character outside of NATO alphabet.
-        phonetic_word = [nato_dict[letter] for letter in word if letter in nato_dict]
-        print(phonetic_word)
+        try:
+            # Use the NATO dictionary to convert each letter into their corresponding NATO alphabet code.
+            phonetic_word = [nato_dict[letter] for letter in word]
+            print(phonetic_word)
+        except KeyError as error:
+            print(f"Opps! We found {error} in the word. Please enter only letters from the NATO alphabet:")
+            print(''.join(nato_dict.keys()) + " (not case-sensitive)\n")
     else:
         loop = False
         print("Goodbye!")
