@@ -9,3 +9,4 @@
 ## Learning Outcomes:
 - Use pandas library to convert csv to a dataframe.
 - Use dictionary and list comprehension to implement the application specifications.
+- Create exception clause to handle KeyErrors in case user enters a letter outside the NATO alphabet. 
