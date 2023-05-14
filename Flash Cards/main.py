@@ -48,7 +48,9 @@ def is_known():
         data = pandas.DataFrame(to_learn_dict)
         data.to_csv("./data/words_to_learn.csv", index=False)
 # --------------------------UI ELEMENTS--------------------------------#
-window =Tk()
+
+
+window = Tk()
 
 window.title("Flash Card App")
 window.config(background=BACKGROUND_COLOR)
