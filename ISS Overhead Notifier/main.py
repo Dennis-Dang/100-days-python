@@ -4,15 +4,8 @@ import datetime as dt
 import smtplib
 
 config = dotenv_values(".env")
-# LATITUDE = float(config["LATITUDE"])
-# LONGITUDE = float(config["LONGITUDE"])
-# TODO Remove this later, these are debug values.
-LATITUDE = 0
-LONGITUDE = -38
-EMAIL = config["DEV_EMAIL"]
-PASSWORD = config["DEV_EMAIL_PASSWORD"]
-
-USER_EMAIL = config["CLIENT_EMAIL"]
+LATITUDE = float(config["LATITUDE"])
+LONGITUDE = float(config["LONGITUDE"])
 
 ISS_API_ENDPOINT = "http://api.open-notify.org/iss-now.json"
 SUNSET_SUNRISE_API_ENDPOINT = "https://api.sunrise-sunset.org/json"
