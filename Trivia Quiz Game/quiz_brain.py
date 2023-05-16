@@ -1,3 +1,6 @@
+import html
+
+
 class QuizBrain:
     def __init__(self, question_list):
         self.question_number = 0
@@ -13,7 +16,8 @@ class QuizBrain:
     def next_question(self):
         cur_question = self.question_list[self.question_number]
         self.question_number += 1
-        user_answer = input(f"Q.{self.question_number}: {cur_question.text} (True/False)")
+        question_text = html.unescape(cur_question.text)
+        user_answer = input(f"Q.{self.question_number}: {question_text} (True/False)")
         self.check_score(user_answer, cur_question.answer)
 
     def still_has_questions(self):
