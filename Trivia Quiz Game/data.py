@@ -1,5 +1,6 @@
 import requests
 
+# Generate 10 questions, of Category 'Science: Computers', question type True/False
 parameters = {
     "amount": 10,
     "category": 18,
