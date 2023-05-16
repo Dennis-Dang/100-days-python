@@ -17,7 +17,9 @@ class WrappingLabel(Label):
 def get_quote():
     response = requests.get(url="https://zenquotes.io/api/random")
     data = response.json()[0]
-    print(data["q"], data["a"])
+    global lbl_quote, lbl_author
+    lbl_quote.config(text=data["q"])
+    lbl_author.config(text=data["a"])
 
 
 window = Tk()
@@ -32,6 +34,8 @@ lbl_author = Label(master=window, text="Author", bg=BACKGROUND_COLOR, fg=AUTHOR_
 lbl_quote.pack(fill=X, pady=20)
 lbl_author.pack()
 
-btn_new_quote = Button(master=window, text="New Quote", background=BACKGROUND_COLOR, foreground=BUTTON_COLOR)
+btn_new_quote = Button(master=window, text="New Quote", background=BACKGROUND_COLOR, foreground=BUTTON_COLOR,
+                       command=get_quote)
 btn_new_quote.pack(pady=30)
+get_quote()
 window.mainloop()
