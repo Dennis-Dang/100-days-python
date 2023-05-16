@@ -16,6 +16,7 @@ class WrappingLabel(Label):
 
 def get_quote():
     response = requests.get(url="https://zenquotes.io/api/random")
+    response.raise_for_status()
     data = response.json()[0]
     global lbl_quote, lbl_author
     lbl_quote.config(text=data["q"])
