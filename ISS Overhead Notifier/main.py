@@ -1,14 +1,14 @@
 from dotenv import dotenv_values
 import requests
-import smtplib
 import datetime as dt
+import smtplib
 
 config = dotenv_values(".env")
 # LATITUDE = float(config["LATITUDE"])
 # LONGITUDE = float(config["LONGITUDE"])
 # TODO Remove this later, these are debug values.
-LATITUDE = 14.00
-LONGITUDE = -25.00
+LATITUDE = 0
+LONGITUDE = -38
 EMAIL = config["DEV_EMAIL"]
 PASSWORD = config["DEV_EMAIL_PASSWORD"]
 
@@ -87,8 +87,11 @@ if is_overhead(ISS_lat, ISS_lon):
     print("Is overhead")
     # Check if it's night. Use datetime module to check if it's past sunset.
     if is_night():
-        print("It's night")
+        message = "The ISS is flying is overhead, look outside and spot it!"
         # Send an email notification that the ISS is nearby above the sky.
-else:
-    print("Not Overhead")
-
+        with smtplib.SMTP("smtp.gmail.com", 587) as connection:
+            connection.starttls()
+            connection.login(user=config["DEV_EMAIL"], password=config["DEV_EMAIL_PASSWORD"])
+            connection.sendmail(from_addr=config["DEV_EMAIL"],
+                                to_addrs=config["CLIENT_EMAIL"],
+                                msg=f"Subject: ISS is nearby!\n\n{message}")
