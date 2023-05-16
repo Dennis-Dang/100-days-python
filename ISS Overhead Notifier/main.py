@@ -74,10 +74,9 @@ response.raise_for_status()
 ISS_data = response.json()
 ISS_lat = float(ISS_data['iss_position']['latitude'])
 ISS_lon = float(ISS_data['iss_position']['longitude'])
-print(ISS_data)
+
 # If ISS is approximately above (+/- 5 degrees) the user's coordinates:
 if is_overhead(ISS_lat, ISS_lon):
-    print("Is overhead")
     # Check if it's night. Use datetime module to check if it's past sunset.
     if is_night():
         message = "The ISS is flying is overhead, look outside and spot it!"
