@@ -13,7 +13,7 @@ notification via a Telegram Bot.
 git clone --depth 1 --filter=blob:none --sparse https://github.com/Dennis-Dang/100-days-python
 cd "100-days-python"
 git sparse-checkout init --cone 
-git sparse-checkout set "Password Manager GUI"
+git sparse-checkout set "Rain Alert"
 ```
 #### Set up the environment variables in a `.env` file.
 The program uses the following environment variables, I've also listed how to configure them:
