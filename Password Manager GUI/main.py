@@ -63,7 +63,7 @@ def search():
             with open("data.json", mode='r') as file:
                 file_data = json.load(file)
         except FileNotFoundError:
-            messagebox.showwarning(title="Error", message="No password file found. Try generating a password.")
+            messagebox.showwarning(title="Error", message="No password file found. Try adding a password.")
         else:
             if str_website in file_data:
                 website_dict = file_data[str_website]
