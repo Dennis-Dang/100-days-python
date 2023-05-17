@@ -7,7 +7,7 @@ parameters = {
     "lon": config["LONGITUDE"],
     "units": "imperial",
     "exclude": "current,minutely,daily,alerts",
-    "appid": config["API_KEY"]
+    "appid": config["OWM_API_KEY"]
 }
 response = requests.get("https://api.openweathermap.org/data/2.8/onecall", params=parameters)
 response.raise_for_status()
@@ -49,4 +49,9 @@ for hour in hourly_weather:
             rain = True
 
 if rain:
-    print("Bring an umbrella.")
+    # Send a Telegram message.
+    your_message = "Bring an umbrella. 🌧☂"
+    TOKEN = config["TELEGRAM_API_KEY"]
+    CHAT_ID = config["TELEGRAM_CHAT_ID"]
+    SEND_URL = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
+    requests.post(SEND_URL, json={'chat_id': CHAT_ID, 'text': your_message})
