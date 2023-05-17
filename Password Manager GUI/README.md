@@ -7,6 +7,7 @@ exercise for designing GUI apps.
 
 ## Run it remotely on my Replit!
 https://replit.com/@DennisDang1/Password-Manager-GUI
+<br>
 Do not use actual personal passwords in this remote replit instance. I am not responsible for any harm done for any information breach.
 This is just a link to demo my project. Please don't use personal information.
 See disclaimer above.
