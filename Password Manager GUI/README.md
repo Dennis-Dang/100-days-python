@@ -5,6 +5,26 @@ DISCLAIMER: I do not recommend practical use of this app to store passwords as i
 absolutely not secure in today's application development standards. This program is only developed as a means of 
 exercise for designing GUI apps.
 
+## Run it remotely on my Replit!
+https://replit.com/@DennisDang1/Password-Manager-GUI
+
+## Or, build it locally:
+```shell
+git clone --depth 1 --filter=blob:none --sparse https://github.com/Dennis-Dang/100-days-python
+cd "100-days-python"
+git sparse-checkout init --cone 
+git sparse-checkout set "Password Manager GUI"
+```
+Install the required packages inside the project directory using git:
+```shell
+pip install -r requirements.txt
+```
+
+Run the main.py script.
+```shell
+python main.py
+```
+
 ## How to use:
 ### Generating a password:
 1. Fill out the following fields: Website, Email/Username
