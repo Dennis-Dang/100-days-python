@@ -26,8 +26,10 @@ class QuizInterface:
         true_img = PhotoImage(file="./images/true.png")
         false_img = PhotoImage(file="./images/false.png")
 
-        self.btn_false = Button(master=self.window, image=false_img, highlightthickness=0, command=self.next_question)
-        self.btn_true = Button(master=self.window, image=true_img, highlightthickness=0)
+        self.btn_false = Button(master=self.window, image=false_img, highlightthickness=0,
+                                command=lambda: self.check_answer("False"))
+        self.btn_true = Button(master=self.window, image=true_img, highlightthickness=0,
+                               command=lambda: self.check_answer("True"))
         self.btn_false.grid(column=0, row=3)
         self.btn_true.grid(column=1, row=3)
 
@@ -38,5 +40,22 @@ class QuizInterface:
         """
         Generates a new question and displays it on the screen.
         """
-        question = self.quiz.next_question()
-        self.canvas.itemconfig(self.cnv_question, text=question)
+        self.canvas.config(bg="white")
+        if self.quiz.still_has_questions():
+            question = self.quiz.next_question()
+            self.lbl_score.config(text=f"Score: {self.quiz.score}")
+            self.canvas.itemconfig(self.cnv_question, text=question)
+        else:
+            self.lbl_score.config(text=f"Score: {self.quiz.score}")
+            self.canvas.itemconfig(self.cnv_question, text="You've reached the end of the quiz!")
+            self.btn_true.config(state="disabled")
+            self.btn_false.config(state="disabled")
+
+    def check_answer(self, true_pressed: str):
+        is_right = self.quiz.check_score(true_pressed)
+        if is_right:
+            self.canvas.config(bg="green")
+        else:
+            self.canvas.config(bg="red")
+        self.window.update()
+        self.window.after(1000, self.next_question())
