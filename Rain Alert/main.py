@@ -1,6 +1,5 @@
 import requests
 from dotenv import dotenv_values
-import datetime as dt
 config = dotenv_values('.env')
 
 parameters = {
@@ -12,7 +11,6 @@ parameters = {
 }
 response = requests.get("https://api.openweathermap.org/data/2.8/onecall", params=parameters)
 response.raise_for_status()
-print(response)
 data = response.json()
 # Get the first 12 hours of weather data.
 hourly_weather = data["hourly"][:12]
