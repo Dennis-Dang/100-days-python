@@ -42,18 +42,14 @@ class QuizBrain:
         Keeps the score for the game.
         :param user_answer: The user's answer to the question
         """
+        # Sanitise API response.
         valid_strings = ["False", "True"]
         if self.get_cur_question().answer in valid_strings:
+            # Check if user's answer is the same as question's answer.
             if user_answer == self.get_cur_question().answer:
-                print("You've got it right!")
                 self.score += 1
                 return True
             else:
-                print("You've got it wrong.")
                 return False
         else:
             raise ValueError(f"Unexpected value found in Trivia API's correct answer: {self.get_cur_question().answer}")
-
-
-        # print("The correct answer was: "+correct_answer)
-        # print(f"Your current score is: {self.score}/{self.question_number}\n")
