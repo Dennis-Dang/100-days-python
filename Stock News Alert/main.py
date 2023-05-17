@@ -7,11 +7,11 @@ COMPANY_NAME = "Tesla Inc"
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
 
-## STEP 3: Use https://www.twilio.com
-# Send a seperate message with the percentage change and each article's title and description to your phone number.
+## STEP 3: Use Telegram API
+# Send a separate message with the percentage change and each article's title and description to your telegram account.
 
 
-#Optional: Format the SMS message like this:
+# Optional: Format the Telegram message like this:
 """
 TSLA: 🔺2%
 Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
