@@ -2,14 +2,13 @@ from dotenv import dotenv_values
 import requests
 
 config = dotenv_values(".env")
-STOCK = "TSLA"
+STOCK = "GOOGL"
 COMPANY_NAME = "Tesla Inc"
 
-## STEP 1: Use https://www.alphavantage.co
-# When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
+# Use https://www.alphavantage.co
 stock_parameters = {
     "function": "TIME_SERIES_DAILY_ADJUSTED",
-    "symbol": "GOOGL",
+    "symbol": STOCK,
     "apikey": config["ALPHAV_API_KEY"]
 }
 stock_response = requests.get("https://www.alphavantage.co/query", params=stock_parameters)
@@ -24,8 +23,7 @@ closing_diff = abs(float(yesterdays_closing) - float(day_before_yesterdays_closi
 delta_percent = (closing_diff / float(yesterdays_closing)) * 100
 
 if delta_percent > 2:
-    # STEP 2: Use https://newsapi.org
-    # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
+    # Use https://newsapi.org
     news_parameters = {
         "apiKey": config["NEWS_API_KEY"],
         "language": "en",
@@ -38,26 +36,30 @@ if delta_percent > 2:
     news_data = news_response.json()['articles']
 
     messages = []
-    for idx in range(3):
+    for idx in range(len(news_data)):
         message = {
             "headline": news_data[idx]['title'],
             "brief": news_data[idx]['description']
         }
         messages.append(message)
-    # print(news_data)
 
-## STEP 3: Use Telegram API
-# Send a separate message with the percentage change and each article's title and description to your telegram account.
+    # Use Telegram API
+    TOKEN = config["TELEGRAM_API_KEY"]
+    CHAT_ID = config["TELEGRAM_CHAT_ID"]
+
+    for message in messages:
+        your_message = f"{STOCK}: {delta_percent}%\n" \
+                       f"Headline: {message['headline']}\n" \
+                       f"Brief: {message['brief']}"
+        SEND_URL = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
+        requests.post(SEND_URL, json={'chat_id': CHAT_ID, 'text': your_message})
 
 
-# Optional: Format the Telegram message like this:
+# Format the of Telegram message looks like this:
 """
 TSLA: 🔺2%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-or
-"TSLA: 🔻5%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
+Headline: Google officially reveals the Pixel Fold. 
+Brief: After months of rumors and leaks, Google has confirmed the Pixel Fold's existence. It showed off the foldable in
+ an official capacity for the first time in a video posted on Twitter and YouTube. The company was expected to reveal 
+ the Pixel Fold at Google I/O..
 """
-
