@@ -19,8 +19,13 @@ yesterdays_closing = daily_stock[1]['4. close']
 day_before_yesterdays_closing = daily_stock[2]['4. close']
 
 
-closing_diff = abs(float(yesterdays_closing) - float(day_before_yesterdays_closing))
-delta_percent = (closing_diff / float(yesterdays_closing)) * 100
+closing_diff = float(yesterdays_closing) - float(day_before_yesterdays_closing)
+up_down = ""
+if closing_diff < 0:
+    up_down = "🔻"
+else:
+    up_down = "🔺"
+delta_percent = (abs(closing_diff) / float(yesterdays_closing)) * 100
 
 if delta_percent > 2:
     # Use https://newsapi.org
@@ -48,14 +53,14 @@ if delta_percent > 2:
     CHAT_ID = config["TELEGRAM_CHAT_ID"]
 
     for message in messages:
-        your_message = f"{STOCK}: {delta_percent}%\n" \
+        your_message = f"{STOCK}: {up_down}{round(delta_percent, 2)}%\n" \
                        f"Headline: {message['headline']}\n" \
                        f"Brief: {message['brief']}"
         SEND_URL = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
         requests.post(SEND_URL, json={'chat_id': CHAT_ID, 'text': your_message})
 
 
-# Format the of Telegram message looks like this:
+# The format the of Telegram message looks like this:
 """
 TSLA: 🔺2%
 Headline: Google officially reveals the Pixel Fold. 
