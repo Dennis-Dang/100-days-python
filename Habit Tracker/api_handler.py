@@ -89,13 +89,13 @@ class FitTracker:
             self.ids["GRAPH_ID"] = graph_id
             self._update_env()
 
-    def add_pixel(self, quantity: str, graph_id: str, date: str):
+    def add_pixel(self, quantity: str, date: str):
         pixel_parameters = {
             "date": date,
             "quantity": quantity
         }
         try:
-            response = requests.post(f"{self.endpoint}/v1/users/{self.ids['USERNAME']}/graphs/{graph_id}",
+            response = requests.post(f"{self.endpoint}/v1/users/{self.ids['USERNAME']}/graphs/{self.ids['GRAPH_ID']}",
                                      json=pixel_parameters,
                                      headers=self.header)
             response.raise_for_status()
