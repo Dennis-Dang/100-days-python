@@ -25,9 +25,14 @@ class FitTracker:
                 "X-USER-TOKEN": self.ids["TOKEN"]
             }
         else:
+            print("Username/Token not found.\n Creating one..")
             self.header = {
                 "X-USER-TOKEN": self.create_user()
             }
+
+        if not self.ids["GRAPH_ID"]:
+            print("Graph ID not found.\n Creating one..")
+            self.create_graph()
 
     def create_user(self):
         token = input("Type in your token: ")
@@ -59,10 +64,11 @@ class FitTracker:
             return token
 
     def create_graph(self):
+        graph_id = input("What do you want the graph name to be?")
         graph_format = {
-            "id": "graph1",
+            "id": graph_id,
             "name": "Exercise Tracker",
-            "unit": "Reps",
+            "unit": "sit-ups",
             "type": "int",
             "color": "sora",
             "timezone": "America/Los_Angeles"
@@ -76,6 +82,8 @@ class FitTracker:
         else:
             graph_data = response.json()
             print(graph_data)
+            self.ids["GRAPH_ID"] = graph_id
+            self._update_env()
 
     def add_pixel(self, quantity: str, graph_id: str, date: str):
         pixel_parameters = {
