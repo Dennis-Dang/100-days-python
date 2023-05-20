@@ -38,12 +38,9 @@ def create_graph(name: str, ):
     print(graph_data)
 
 
-def add_pixel(quantity: str, graph_id: str):
-    today = dt.datetime(year=2023, month=5, day=18)
-    print(today.strftime("%Y%m%d"))
-
+def add_pixel(quantity: str, graph_id: str, date: str):
     pixel_parameters = {
-        "date": "20230518",
+        "date": date,
         "quantity": quantity
     }
 
@@ -73,5 +70,47 @@ def delete_pixel(graph_id: str, date: str):
     print(response.json())
 
 
-update_pixel("graph1", "20230518", "40")
-# delete_pixel("graph1", "20230518")
+commands = '''
+Add: Add an entry to the tracker for a day.
+Modify: Modify an entry.
+Delete: Delete an entry.
+Settings: Configure account settings.
+'''
+
+print("Welcome to the Habit Tracker, what would you like to do?")
+print("What would you like to do? "+commands)
+to_do = input("> ").lower()
+while 'exit' != to_do:
+    if to_do == 'add':
+        print("Enter the date you want to add the entry for. (YYYY-MM-DD)\n"
+              "Or press Enter to submit as today's date.")
+        str_date = input("> ")
+        str_date = str_date.strip()
+        date = None
+        if not str_date:
+            date = dt.datetime.today()
+        else:
+            try:
+                date = dt.datetime.strptime(str_date, "%Y-%m-%d").date()
+            except ValueError:
+                print("Invalid date. Date must be formatted YYYY-MM-DD")
+
+        if date:
+            try:
+                print(f"How many sit-ups did you do on {date.strftime('%Y-%m-%d')}?")
+                quantity = int(input("> "))
+            except ValueError:
+                print("Quantity must be a number. Try again.")
+            else:
+                print(f"You've done {quantity} sit-ups on {date}. Confirm? (Y/N)")
+                confirm = input("> ").lower()
+                if confirm == 'y':
+                    try:
+                        add_pixel(config['GRAPH_ID'], date.strftime("%Y%m%d"))
+                    except Exception as e:
+                        print("Uh oh, could not submit pixel: " + e)
+                    else:
+                        print("Pixel added successfully.")
+
+    print("\nWhat would you like to do?"+commands)
+    to_do = input("> ").lower()
