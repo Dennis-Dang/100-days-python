@@ -64,7 +64,11 @@ class FitTracker:
             return token
 
     def create_graph(self):
-        graph_id = input("What do you want the graph name to be?")
+        graph_id = input("What do you want the graph id to be? ")
+        while not re.match("^[a-z][a-z0-9]{1,16}$", graph_id):
+            print("Username must be within 32 characters in length, "
+                  "start with a letter, followed by alphanumeric characters.")
+            graph_id = input("What do you want the graph id to be? ")
         graph_format = {
             "id": graph_id,
             "name": "Exercise Tracker",
