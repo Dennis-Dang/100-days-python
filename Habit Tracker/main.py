@@ -16,11 +16,11 @@ Settings: Configure account settings.
 '''
 
 print("Welcome to the Habit Tracker.")
-to_do = pyip.inputMenu(['add', 'modify', 'delete', 'settings', 'idk'], "What would you like to do?\n", numbered=True)
+to_do = pyip.inputMenu(['add/modify', 'delete', 'settings', 'idk'], "What would you like to do?\n", numbered=True)
 while 'exit' != to_do:
     if to_do == 'idk':
         print(commands)
-    elif to_do == 'add':
+    elif to_do == 'add/modify':
         print("Enter the date you want to add the entry for. (YYYY-MM-DD)\n"
               "Or press Enter to submit as today's date.")
         str_date = pyip.inputDatetime('Enter Date ', formats=('%Y-%m-%d', '%Y/%m/%d', '%Y.%m.%d', '%Y %m %d'),
