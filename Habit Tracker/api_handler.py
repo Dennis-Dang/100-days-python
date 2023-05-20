@@ -2,6 +2,7 @@ import requests
 from dotenv import dotenv_values
 import re
 import os
+import pyinputplus as pyip
 
 config = dotenv_values('.env')
 
@@ -62,6 +63,41 @@ class FitTracker:
             self.ids["USERNAME"] = username
             self._update_env()
             return token
+
+    def delete_user(self):
+        choice = pyip.inputMenu([self.ids['USERNAME'], "other username", "return"],
+                                f"Do you want to delete {self.ids['USERNAME']}, or a different user?\n")
+        username: str
+        token: str
+        if choice == "other username":
+            username = input("Please specify which username you want deleted: ")
+            token = input(f"Please enter {username}'s token: ")
+        elif choice == self.ids["USERNAME"]:
+            username = self.ids["USERNAME"]
+            token = input(f"Enter the token for {username}: ")
+            if token != self.ids["TOKEN"]:
+                print("Incorrect token received. Returning to menu.")
+                return
+        else:
+            return
+
+        delete_header = {
+            "X-USER-TOKEN": token
+        }
+
+        confirm = pyip.inputYesNo(f"You are about to delete {username}, this action is irreversible.\n"
+                                  f"(Unless there's an error)\nConfirm? (Yes/No) ")
+        if confirm == 'yes':
+            try:
+                response = requests.delete(f"{self.endpoint}/v1/users/{username}", headers=delete_header)
+                response.raise_for_status()
+            except Exception as e:
+                print(f"{type(e).__name__} at line {e.__traceback__.tb_lineno} of {__file__}: {e}")
+            else:
+                print(response.json())
+                if choice == self.ids['USERNAME']:
+                    self.ids['USERNAME'] = ''
+                    self._update_env()
 
     def create_graph(self):
         graph_id = input("What do you want the graph id to be? ")
