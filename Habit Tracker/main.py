@@ -1,9 +1,6 @@
-import requests
-from dotenv import dotenv_values
 import datetime as dt
 import api_handler
 
-config = dotenv_values('.env')
 PIXELA_ENDPOINT = "https://pixe.la"
 
 tracker = api_handler.FitTracker()
@@ -50,9 +47,9 @@ while 'exit' != to_do:
                 print(f"You've done {quantity} sit-ups on {date.strftime('%Y-%m-%d')}. Confirm? (Y/N)")
                 confirm = input("> ").lower()
                 if confirm == 'y':
-                    if config['GRAPH_ID']:
+                    if tracker.ids['GRAPH_ID']:
                         try:
-                            tracker.add_pixel(str(quantity), config['GRAPH_ID'], date.strftime("%Y%m%d"))
+                            tracker.add_pixel(str(quantity), tracker.ids['GRAPH_ID'], date.strftime("%Y%m%d"))
                         except Exception as e:
                             print(f"{type(e).__name__} at line {e.__traceback__.tb_lineno} of {__file__}: {e}")
                         else:
