@@ -34,10 +34,14 @@ class FitTracker:
             "agreeTermsOfService": "yes",
             "notMinor": "yes"
         }
-        response = requests.post(f"{self.endpoint}/v1/users", json=pixela_parameters)
-        response.raise_for_status()
-        print(response.json())
-        return response.json()
+        try:
+            response = requests.post(f"{self.endpoint}/v1/users", json=pixela_parameters)
+            response.raise_for_status()
+        except Exception as e:
+            print(f"{type(e).__name__} at line {e.__traceback__.tb_lineno} of {__file__}: {e}")
+        else:
+            print(response.json())
+            return response.json()
 
     def create_graph(self):
         graph_format = {
@@ -48,37 +52,51 @@ class FitTracker:
             "color": "sora",
             "timezone": "America/Los_Angeles"
         }
-        response = requests.post(f"{self.endpoint}/v1/users/{self.username}/graphs", json=graph_format,
-                                 headers=self.header)
-        response.raise_for_status()
-        graph_data = response.json()
-        print(graph_data)
+        try:
+            response = requests.post(f"{self.endpoint}/v1/users/{self.username}/graphs", json=graph_format,
+                                     headers=self.header)
+            response.raise_for_status()
+        except Exception as e:
+            print(f"{type(e).__name__} at line {e.__traceback__.tb_lineno} of {__file__}: {e}")
+        else:
+            graph_data = response.json()
+            print(graph_data)
 
     def add_pixel(self, quantity: str, graph_id: str, date: str):
         pixel_parameters = {
             "date": date,
             "quantity": quantity
         }
-
-        response = requests.post(f"{self.endpoint}/v1/users/{self.username}/graphs/{graph_id}",
-                                 json=pixel_parameters,
-                                 headers=self.header)
-        response.raise_for_status()
-        print(response.json())
+        try:
+            response = requests.post(f"{self.endpoint}/v1/users/{self.username}/graphs/{graph_id}",
+                                     json=pixel_parameters,
+                                     headers=self.header)
+            response.raise_for_status()
+        except Exception as e:
+            print(f"{type(e).__name__} at line {e.__traceback__.tb_lineno} of {__file__}: {e}")
+        else:
+            print(response.json())
 
     def update_pixel(self, graph_id: str, date: str, quantity: str):
         pixel_parameters = {
             "quantity": quantity
         }
-
-        response = requests.put(f"{self.endpoint}/v1/users/{self.username}/graphs/{graph_id}/{date}",
-                                json=pixel_parameters,
-                                headers=self.header)
-        response.raise_for_status()
-        print(response.json())
+        try:
+            response = requests.put(f"{self.endpoint}/v1/users/{self.username}/graphs/{graph_id}/{date}",
+                                    json=pixel_parameters,
+                                    headers=self.header)
+            response.raise_for_status()
+        except Exception as e:
+            print(f"{type(e).__name__} at line {e.__traceback__.tb_lineno} of {__file__}: {e}")
+        else:
+            print(response.json())
 
     def delete_pixel(self, graph_id: str, date: str):
-        response = requests.delete(f"{self.endpoint}/v1/users/{self.username}/graphs/{graph_id}/{date}",
+        try:
+            response = requests.delete(f"{self.endpoint}/v1/users/{self.username}/graphs/{graph_id}/{date}",
                                    headers=self.header)
-        response.raise_for_status()
-        print(response.json())
+            response.raise_for_status()
+        except Exception as e:
+            print(f"{type(e).__name__} at line {e.__traceback__.tb_lineno} of {__file__}: {e}")
+        else:
+            print(response.json())
