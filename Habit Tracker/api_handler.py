@@ -66,7 +66,7 @@ class FitTracker:
     def create_graph(self):
         graph_id = input("What do you want the graph id to be? ")
         while not re.match("^[a-z][a-z0-9]{1,16}$", graph_id):
-            print("Username must be within 32 characters in length, "
+            print("Graph ID must be within 16 characters in length, "
                   "start with a letter, followed by alphanumeric characters.")
             graph_id = input("What do you want the graph id to be? ")
         graph_format = {
