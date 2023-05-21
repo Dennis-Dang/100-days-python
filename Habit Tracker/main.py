@@ -30,7 +30,7 @@ def get_date() -> str or None:
                   f"Enter a date before or on {dt.datetime.today().strftime('%Y-%m-%d')}. Returning to menu.")
             return None
 
-    return date.strftime('%Y-%m-%d')
+    return date.strftime('%Y%m%d')
 
 
 print("Welcome to the Habit Tracker.")
@@ -54,6 +54,8 @@ while 'exit' != to_do:
                         print("Pixel added successfully.")
                 else:
                     print("GRAPH_ID not found. Try creating a graph first.")
-
+    elif to_do == 'delete':
+        pixel_date = get_date()
+        tracker.delete_pixel(pixel_date)
     to_do = pyip.inputMenu(['add', 'modify', 'delete', 'settings', 'idk'], "What would you like to do?\n",
                            numbered=True)
