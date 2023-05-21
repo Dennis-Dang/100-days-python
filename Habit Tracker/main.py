@@ -57,5 +57,5 @@ while 'exit' != to_do:
     elif to_do == 'delete':
         pixel_date = get_date()
         tracker.delete_pixel(pixel_date)
-    to_do = pyip.inputMenu(['add', 'modify', 'delete', 'settings', 'idk'], "What would you like to do?\n",
+    to_do = pyip.inputMenu(['add/modify', 'delete', 'settings', 'idk'], "What would you like to do?\n",
                            numbered=True)
