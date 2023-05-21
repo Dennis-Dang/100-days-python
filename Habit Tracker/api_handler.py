@@ -18,6 +18,7 @@ class FitTracker:
 
     def __init__(self):
         self.endpoint = "https://pixe.la"
+        self.ids = {}
         try:
             self.ids = {
                 "TOKEN": config["TOKEN"],
@@ -28,12 +29,16 @@ class FitTracker:
             if e.args[0] == 'TOKEN' or e.args[0] == 'USERNAME':
                 if 'yes' == pyip.inputYesNo("Account not found in '.env' file.\n "
                                             "Do you wish to create an account? (Y/N) "):
+                    self.ids["TOKEN"] = ""
+                    self.ids["USERNAME"] = ""
                     self.create_user()
                 else:
                     quit()
-            elif e.args[0] == 'GRAPH_ID':
-                if 'yes' == pyip.inputYesNo("Account not found in '.env' file.\n "
+
+            if e.args[0] == 'GRAPH_ID':
+                if 'yes' == pyip.inputYesNo("Graph not found in '.env' file.\n "
                                             "Do you wish to create an account? (Y/N)"):
+                    self.ids["GRAPH_ID"] = ""
                     self.create_graph()
                 else:
                     quit()
