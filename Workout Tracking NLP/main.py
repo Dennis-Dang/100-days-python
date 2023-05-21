@@ -32,7 +32,7 @@ header = {
 }
 request_body = {
  "query": query,
- "gender": "male",
+ "gender": config["SEX"],
  "weight_kg": config["WEIGHT"],
  "height_cm": config["HEIGHT"],
  "age": config["AGE"]
