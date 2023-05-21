@@ -18,11 +18,26 @@ class FitTracker:
 
     def __init__(self):
         self.endpoint = "https://pixe.la"
-        self.ids = {
-            "TOKEN": config["TOKEN"],
-            "USERNAME": config["USERNAME"],
-            "GRAPH_ID": config["GRAPH_ID"]
-        }
+        try:
+            self.ids = {
+                "TOKEN": config["TOKEN"],
+                "USERNAME": config["USERNAME"],
+                "GRAPH_ID": config["GRAPH_ID"]
+            }
+        except KeyError as e:
+            if e.args[0] == 'TOKEN' or e.args[0] == 'USERNAME':
+                if 'yes' == pyip.inputYesNo("Account not found in '.env' file.\n "
+                                            "Do you wish to create an account? (Y/N) "):
+                    self.create_user()
+                else:
+                    quit()
+            elif e.args[0] == 'GRAPH_ID':
+                if 'yes' == pyip.inputYesNo("Account not found in '.env' file.\n "
+                                            "Do you wish to create an account? (Y/N)"):
+                    self.create_graph()
+                else:
+                    quit()
+
         if self.ids["TOKEN"] and self.ids["USERNAME"]:
             self.header = {
                 "X-USER-TOKEN": self.ids["TOKEN"]
