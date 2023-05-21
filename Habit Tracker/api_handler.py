@@ -1,7 +1,9 @@
 import requests
+from urllib.error import HTTPError
 from dotenv import dotenv_values
 import re
 import os
+import time
 import pyinputplus as pyip
 
 config = dotenv_values('.env')
@@ -154,11 +156,17 @@ class FitTracker:
         else:
             print(response.json())
 
-    def delete_pixel(self, graph_id: str, date: str):
+    def delete_pixel(self, date: str):
         try:
-            response = requests.delete(f"{self.endpoint}/v1/users/{self.ids['USERNAME']}/graphs/{graph_id}/{date}",
+            response = requests.delete(f"{self.endpoint}/v1/users/{self.ids['USERNAME']}/"
+                                       f"graphs/{self.ids['GRAPH_ID']}/{date}",
                                        headers=self.header)
             response.raise_for_status()
+        except HTTPError as e:
+            while e.code == 503:
+                print("Pixela is temporarily unavailable, retrying request..")
+                time.sleep(1)
+                self.delete_pixel()
         except Exception as e:
             print(f"{type(e).__name__} at line {e.__traceback__.tb_lineno} of {__file__}: {e}")
         else:
