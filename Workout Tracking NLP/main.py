@@ -33,9 +33,9 @@ header = {
 request_body = {
  "query": query,
  "gender": "male",
- "weight_kg": weight,
- "height_cm": height,
- "age": age
+ "weight_kg": config["WEIGHT"],
+ "height_cm": config["HEIGHT"],
+ "age": config["AGE"]
 }
 now = dt.datetime.now()
 tz = pytz.timezone("US/Pacific")
