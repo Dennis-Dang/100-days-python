@@ -30,3 +30,31 @@ URL = "https://web.archive.org/web/20200518073855/https://www.empireonline.com/m
 Archive.org maintains archives of webpages throughout the internet. To my knowledge, most of the mediums hosted on 
 their website were obtained from open and sources. At the very least, the website (Empire) that was archived was freely 
 accessible to the public.
+
+#### https://archive.org/robots.txt
+```commandline
+
+Sitemap: https://archive.org/sitemap/sitemap.xml
+
+##############################################
+#
+# Welcome to the Archive!
+#
+##############################################
+# Please crawl our files.
+# We appreciate if you can crawl responsibly.
+# Stay open!
+##############################################
+
+
+User-agent: *
+Disallow: /control/
+Disallow: /report/
+```
+
+#### https://www.empireonline.com/robots.txt
+```commandline
+User-agent: *
+Disallow:
+Sitemap: https://www.empireonline.com/sitemap_index.xml
+```
