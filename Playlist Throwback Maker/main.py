@@ -50,13 +50,16 @@ spotify = spotipy.Spotify(
         client_secret=CLIENT_SECRET,
         redirect_uri="http://example.com",
         show_dialog=True, # Show authorization dialog every time when authenticating regardless refresh token available
-        cache_path="token.txt"
+        cache_path="token.txt",
+        scope="playlist-modify-private"
     )
 )
 
 user_id = spotify.current_user()["id"]
 print(user_id)
 
+track_uris = []
+not_found = []
 for idx in range(100):
     result = spotify.search(q=f"{song_titles[idx]} artist: {song_artists[idx]} year:{str_date.strftime('%Y')}",
                             limit=1, type="track", market="US")
@@ -64,5 +67,26 @@ for idx in range(100):
         uri = result["tracks"]["items"][0]["uri"]
     except IndexError:
         print(f"{song_titles[idx]} doesn't exist in spotify.")
-    print(result)
-    sleep(1)
+        not_found.append(song_titles[idx])
+    else:
+        print(uri)
+        track_uris.append(uri)
+    if idx % 10 == 0:
+        sleep(1) # wait a second for every 10 requests.
+
+playlist = spotify.user_playlist_create(
+    user=user_id,
+    name=f"{str_date.strftime('%Y-%m-%d')} Billboard 100",
+    public=False,
+    description="A playlist created by ThrowbackMaker"
+)
+
+spotify.playlist_add_items(
+    playlist_id=playlist["id"],
+    items=track_uris
+)
+
+print("Your playlist is complete\nThe following songs could not be found on spotify: ")
+for song in not_found:
+    print(song)
+print(f"Link: https://open.spotify.com/playlist/{playlist['id']}")
