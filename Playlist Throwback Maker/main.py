@@ -2,6 +2,12 @@ import datetime as dt
 import pyinputplus as pyip
 import requests
 from bs4 import BeautifulSoup
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+from dotenv import dotenv_values
+config = dotenv_values('.env')
+CLIENT_ID = config["CLIENT_ID"]
+CLIENT_SECRET = config["CLIENT_SECRET"]
 
 # str_date = pyip.inputDatetime("What year do you want to travel to? Type in the date in this format YYYY-MM-DD: ",
 #                               formats=('%Y-%m-%d',))
@@ -36,3 +42,16 @@ for song in song_list:
 
 print(song_titles)
 print(song_artists)
+spotify = spotipy.Spotify(
+    # Authorization Code Flow for Spotify’s OAuth
+    auth_manager=SpotifyOAuth(
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_SECRET,
+        redirect_uri="http://example.com",
+        show_dialog=True, # Show authorization dialog every time when authenticating regardless refresh token available
+        cache_path="token.txt"
+    )
+)
+
+user_id = spotify.current_user()["id"]
+print(user_id)
