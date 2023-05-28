@@ -45,13 +45,11 @@ def get_most_expensive():
     for i in range(len(item_upgrades)):
         available_items[i] = driver.find_element(By.ID, 'buy' + item_upgrades[i])
 
-    found_item = None
     for item in reversed(available_items):
-        if found_item is None and item.get_attribute("class") == "":
-            found_item = item
-
-    if found_item is not None:
-        found_item.click()
+        print(available_items.index(item))
+        if item.get_attribute("class") == "":
+            item.click()
+            break
 
 
 driver.get('https://orteil.dashnet.org/experiments/cookie/')
@@ -65,9 +63,8 @@ while loop:
     cookie.click()
     # For every 5 seconds:
     if time.time() > timeout:
-        pass
-        # Check if upgrades available and purchase them.
-    elif time.time() == five_min:
+        get_most_expensive()
+    elif time.time() >= five_min:
         loop = False
         # Print Cookies/Sec after 5 Minutes have passed.
         print(driver.find_element(By.ID, "cps").text)
