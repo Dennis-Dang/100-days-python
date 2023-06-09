@@ -1,7 +1,6 @@
 from typing import Final
 import turtle as t
 import random
-import sys
 
 # Canvas size
 WINDOW_HEIGHT: Final = 700
