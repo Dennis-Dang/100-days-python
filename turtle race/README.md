@@ -1,6 +1,6 @@
 # Turtle Race
 
-##### This is a game where you bet which turtle will win the race at the end.
+##### This is a game with a graphical interface where you bet which turtle will win the race at the end.
 
 ### Learning Outcomes
 

@@ -15,7 +15,6 @@ screen = t.Screen()
 screen.setup(width=WINDOW_WIDTH, height=WINDOW_HEIGHT)
 num_pos_turtles = WINDOW_HEIGHT/19
 
-user_bet = t.textinput("Who's going to win?", "Who's going to win?\n Type a color: ")
 colors = ["red", "orange", "yellow", "green", "blue", "purple", "tan", "aquamarine"]
 
 
@@ -69,12 +68,16 @@ def go_to_start(turtle_list):
 
 
 race_is_on = False
-if user_bet:
-    race_is_on = True
 
 racers = create_colored_turtles()
 draw_finishline()
 go_to_start(racers)
+
+user_bet = t.textinput("Who's going to win?", "Who's going to win?\n Type a color: ")
+if user_bet:
+    race_is_on = True
+else:
+    exit()
 
 # max_x = -sys.maxsize
 # min_x = sys.maxsize
